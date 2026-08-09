@@ -9,7 +9,7 @@ from typing import Any
 
 import pytest
 
-from app.llm.client import ChatResult, LLMClient, LLMError, ToolCall
+from app.llm.client import ChatResult, LLMClient, LLMError
 
 pytestmark = pytest.mark.asyncio
 
