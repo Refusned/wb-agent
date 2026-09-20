@@ -2,9 +2,9 @@
 
 <img src=".github/assets/logo.webp" width="160" alt="Price of WB"/>
 
-# 📊 WB Price Tracker Bot
+# WB Agent
 
-[![Open to work](https://img.shields.io/badge/%E2%9C%A8%20Open%20to%20work-AI%20Automation%20Specialist-22C55E?style=for-the-badge)](https://t.me/refusned)
+[Профиль автора: Applied AI / Python Backend](https://github.com/Refusned)
 
 **Telegram-бот для мониторинга цен и аналитики продаж на Wildberries.**
 Фоновый поллинг каталога, алерты падения цены, маржинальный калькулятор,
@@ -19,6 +19,17 @@
 </div>
 
 ---
+
+## Маршрут по коду
+
+- [Seller API](app/wb/seller_client.py), [SQLite-репозитории](app/storage/) и [повторные попытки](app/utils/retry.py).
+- [15 инструментов агента](app/services/agent_tools.py) и [проверка read/propose-контракта](tests/test_agent_tools_readonly.py).
+- [Диалог и подтверждение действий](app/handlers/agent_chat.py), [тесты защиты операций](tests/test_money_safety.py).
+- [Автоответы](app/services/feedback_responder.py) и [их тесты](tests/test_feedback_responder.py): это отдельный режим под флагом, по умолчанию выключенным.
+
+Подтверждение подписанной кнопкой относится к интерактивному LLM-агенту. Отдельный модуль автоответов при включении может публиковать ответы самостоятельно.
+
+[![CI](https://github.com/Refusned/wb-agent/actions/workflows/ci.yml/badge.svg)](https://github.com/Refusned/wb-agent/actions/workflows/ci.yml)
 
 ## 📸 Демо
 
@@ -51,7 +62,8 @@
 
 </details>
 
-> Бот живёт в Telegram и работает 24/7 в Docker-контейнере на VPS.
+> Проект использовался в собственном e-commerce-бизнесе в период до августа 2026.
+> Публичный репозиторий показывает реализацию; текущая доступность клиентского развёртывания не является публичным демо.
 
 ---
 
@@ -329,8 +341,8 @@ inline-кнопке подтверждения.
 ### Через Docker (рекомендуется)
 
 ```bash
-git clone https://github.com/Refusned/wb-price-tracker-bot.git
-cd wb-price-tracker-bot
+git clone https://github.com/Refusned/wb-agent.git
+cd wb-agent
 
 cp .env.example .env
 # Заполнить как минимум BOT_TOKEN — токен от @BotFather
@@ -344,8 +356,8 @@ docker-compose logs -f
 ### Локально (без Docker)
 
 ```bash
-git clone https://github.com/Refusned/wb-price-tracker-bot.git
-cd wb-price-tracker-bot
+git clone https://github.com/Refusned/wb-agent.git
+cd wb-agent
 
 python3.11 -m venv .venv
 source .venv/bin/activate
@@ -403,7 +415,7 @@ pytest tests/ -v
 ## 📁 Структура проекта
 
 ```
-wb-price-tracker-bot/
+wb-agent/
 ├── app/
 │   ├── handlers/                # Telegram-команды
 │   │   ├── admin.py             # Админ-панель и системные команды
@@ -457,7 +469,7 @@ wb-price-tracker-bot/
 
 <div align="center">
 
-> *Личный проект. Бот используется для мониторинга цен в моих закупочных циклах
+> *Личный проект. Бот использовался для мониторинга цен в моих закупочных циклах
 > на Wildberries. Опубликован как пример работы с async Python, Telegram-ботами
 > на aiogram 3 и интеграциями с маркетплейсами.*
 
